@@ -53,7 +53,7 @@
   <name>peppol-commons</name>
   <url>https://github.com/phax/peppol-commons/peppol-commons</url>
   <inceptionYear>2015</inceptionYear>
-  
+
   <licenses>
     <license>
       <name>MPL 1.1</name>
@@ -66,7 +66,7 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
- 
+
   <organization>
     <name>Philip Helger</name>
     <url>http://www.helger.com</url>
@@ -127,6 +127,10 @@
       <artifactId>dnsjava</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.helger</groupId>
+      <artifactId>peppol-jaxb</artifactId>
+    </dependency>
   </dependencies>
 
   <build>
@@ -146,80 +150,80 @@
           </instructions>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.jvnet.jaxb2.maven2</groupId>
-        <artifactId>maven-jaxb2-plugin</artifactId>
-        <version>0.13.1</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <specVersion>2.1</specVersion>
-          <schemaDirectory>src/main/resources/WEB-INF/wsdl</schemaDirectory>
-          <bindingDirectory>src/main/jaxb</bindingDirectory>
-          <!-- Required for schema component designator in binding file -->
-          <extension>true</extension>
-          <!--  
-          <forceRegenerate>true</forceRegenerate>
-          -->
-          <args>
-            <arg>-no-header</arg>
-            <arg>-Xinheritance</arg>
-            <arg>-Xph-default-locale</arg>
-            <arg>en_US</arg>
-            <arg>-Xph-annotate</arg>
-            <arg>-Xph-fields-private</arg>
-            <arg>-Xph-code-quality</arg>
-            <arg>-Xph-implements</arg>
-            <arg>java.io.Serializable</arg>
-            <arg>-Xph-equalshashcode</arg>
-            <arg>-Xph-tostring</arg>
-            <arg>-Xph-list-extension</arg>
-            <arg>-Xph-csu</arg>
-          </args>
-          <plugins>
-            <!-- Required for -Xinheritance -->
-            <plugin>
-              <groupId>org.jvnet.jaxb2_commons</groupId>
-              <artifactId>jaxb2-basics</artifactId>
-              <version>0.11.0</version>
-            </plugin>
-          </plugins>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>2.2.11</version>
-          </dependency>
-          <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-xjc</artifactId>
-            <version>2.2.11</version>
-          </dependency>
-          <dependency>
-            <groupId>com.helger</groupId>
-            <artifactId>ph-jaxb22-plugin</artifactId>
-            <version>2.2.11.6</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>com.mycila</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <configuration>
-          <excludes>
-            <exclude>src/main/resources/WEB-INF/wsdl/**/bdx-smp-*.xsd</exclude>
-            <exclude>src/main/resources/WEB-INF/wsdl/oasis-200401-wss-wssecurity-utility-1.0.xsd</exclude>
-            <exclude>src/main/resources/WEB-INF/wsdl/ws-addr.xsd</exclude>
-            <exclude>src/main/resources/WEB-INF/wsdl/xmldsig-core-schema.xsd</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.jvnet.jaxb2.maven2</groupId>-->
+        <!--<artifactId>maven-jaxb2-plugin</artifactId>-->
+        <!--<version>0.13.1</version>-->
+        <!--<executions>-->
+          <!--<execution>-->
+            <!--<goals>-->
+              <!--<goal>generate</goal>-->
+            <!--</goals>-->
+          <!--</execution>-->
+        <!--</executions>-->
+        <!--<configuration>-->
+          <!--<specVersion>2.1</specVersion>-->
+          <!--<schemaDirectory>src/main/resources/WEB-INF/wsdl</schemaDirectory>-->
+          <!--<bindingDirectory>src/main/jaxb</bindingDirectory>-->
+          <!--&lt;!&ndash; Required for schema component designator in binding file &ndash;&gt;-->
+          <!--<extension>true</extension>-->
+          <!--&lt;!&ndash;-->
+          <!--<forceRegenerate>true</forceRegenerate>-->
+          <!--&ndash;&gt;-->
+          <!--<args>-->
+            <!--<arg>-no-header</arg>-->
+            <!--<arg>-Xinheritance</arg>-->
+            <!--<arg>-Xph-default-locale</arg>-->
+            <!--<arg>en_US</arg>-->
+            <!--<arg>-Xph-annotate</arg>-->
+            <!--<arg>-Xph-fields-private</arg>-->
+            <!--<arg>-Xph-code-quality</arg>-->
+            <!--<arg>-Xph-implements</arg>-->
+            <!--<arg>java.io.Serializable</arg>-->
+            <!--<arg>-Xph-equalshashcode</arg>-->
+            <!--<arg>-Xph-tostring</arg>-->
+            <!--<arg>-Xph-list-extension</arg>-->
+            <!--<arg>-Xph-csu</arg>-->
+          <!--</args>-->
+          <!--<plugins>-->
+            <!--&lt;!&ndash; Required for -Xinheritance &ndash;&gt;-->
+            <!--<plugin>-->
+              <!--<groupId>org.jvnet.jaxb2_commons</groupId>-->
+              <!--<artifactId>jaxb2-basics</artifactId>-->
+              <!--<version>0.11.0</version>-->
+            <!--</plugin>-->
+          <!--</plugins>-->
+        <!--</configuration>-->
+        <!--<dependencies>-->
+          <!--<dependency>-->
+            <!--<groupId>com.sun.xml.bind</groupId>-->
+            <!--<artifactId>jaxb-impl</artifactId>-->
+            <!--<version>2.2.11</version>-->
+          <!--</dependency>-->
+          <!--<dependency>-->
+            <!--<groupId>com.sun.xml.bind</groupId>-->
+            <!--<artifactId>jaxb-xjc</artifactId>-->
+            <!--<version>2.2.11</version>-->
+          <!--</dependency>-->
+          <!--<dependency>-->
+            <!--<groupId>com.helger</groupId>-->
+            <!--<artifactId>ph-jaxb22-plugin</artifactId>-->
+            <!--<version>2.2.11.6</version>-->
+          <!--</dependency>-->
+        <!--</dependencies>-->
+      <!--</plugin>-->
+      <!--<plugin>-->
+        <!--<groupId>com.mycila</groupId>-->
+        <!--<artifactId>license-maven-plugin</artifactId>-->
+        <!--<configuration>-->
+          <!--<excludes>-->
+            <!--<exclude>src/main/resources/WEB-INF/wsdl/**/bdx-smp-*.xsd</exclude>-->
+            <!--<exclude>src/main/resources/WEB-INF/wsdl/oasis-200401-wss-wssecurity-utility-1.0.xsd</exclude>-->
+            <!--<exclude>src/main/resources/WEB-INF/wsdl/ws-addr.xsd</exclude>-->
+            <!--<exclude>src/main/resources/WEB-INF/wsdl/xmldsig-core-schema.xsd</exclude>-->
+          <!--</excludes>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
     </plugins>
   </build>
 </project>
